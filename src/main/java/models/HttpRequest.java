@@ -1,3 +1,5 @@
+package models;
+
 import lombok.Data;
 
 import java.util.LinkedHashMap;
@@ -12,11 +14,6 @@ public class HttpRequest {
     private Map<String, String> headers = new LinkedHashMap<>();
     private String body;
 
-    public enum Method {
-        GET,
-        POST
-    }
-
     public static HttpRequest of(String text) {
         HttpRequest request = new HttpRequest();
 
@@ -25,7 +22,6 @@ public class HttpRequest {
             lines[i] = lines[i].replace("\r", "");
         }
 
-        //parse start line
         String startLine = lines[0];
         String[] startLineParts = startLine.split(" ");
         request.setMethod(Method.valueOf(startLineParts[0]));

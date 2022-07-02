@@ -1,10 +1,11 @@
 package models;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 @Data
 public class Pet {
-    private int id;
+    private long id;
     private Category category;
     private String name;
     private String[] photoUrls;
@@ -12,8 +13,11 @@ public class Pet {
     private Status status;
 
     public enum Status {
+        @SerializedName("available")
         AVAILABLE,
+        @SerializedName("pending")
         PENDING,
+        @SerializedName("sold")
         SOLD
     }
 }

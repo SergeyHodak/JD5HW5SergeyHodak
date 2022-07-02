@@ -4,8 +4,6 @@ import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class Files {
-    //index.html
-    //test.html
     public static String getFileByPath(String path) throws FileNotFoundException {
         if (path.equals("/")) {
             return readHtmlFile("index.html");

@@ -1,3 +1,6 @@
+import models.HttpRequest;
+import models.HttpResponse;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;

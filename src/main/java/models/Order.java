@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class Order {
-    private int id;
-    private int petId;
-    private int quantity;
+    private long id;
+    private long petId;
+    private long quantity;
     private String shipDate;
     private Status status;
     private boolean complete;
