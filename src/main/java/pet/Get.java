@@ -1,10 +1,15 @@
 package pet;
 
-import models.Method;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import general_classes.Method;
+import general_classes.Response;
+import general_classes.URLBuilder;
 import models.Pet;
 import models.Tag;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
@@ -36,7 +41,9 @@ public class Get {
             connection.connect();
 
             if (HttpURLConnection.HTTP_OK == connection.getResponseCode()) {
-                return new Response().getList(connection);
+                Type type = new TypeToken<List<Pet>>(){}.getType();
+                String message = new Response().getResponse(connection);
+                return new Gson().fromJson(message, type);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,7 +66,9 @@ public class Get {
             connection.connect();
 
             if (HttpURLConnection.HTTP_OK == connection.getResponseCode()) {
-                return new Response().getList(connection);
+                Type type = new TypeToken<List<Pet>>(){}.getType();
+                String message = new Response().getResponse(connection);
+                return new Gson().fromJson(message, type);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,7 +84,9 @@ public class Get {
             connection.connect();
 
             if (HttpURLConnection.HTTP_OK == connection.getResponseCode()) {
-                return new Response().get(connection);
+                Type type = Pet.class;
+                String message = new Response().getResponse(connection);
+                return new Gson().fromJson(message, type);
             }
         } catch (IOException e) {
             e.printStackTrace();

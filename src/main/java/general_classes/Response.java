@@ -1,25 +1,12 @@
-package pet;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import models.Pet;
+package general_classes;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.util.List;
 
 public class Response {
-    public List<Pet> getList(HttpURLConnection connection) {
-        return new Gson().fromJson(getResponse(connection), new TypeToken<List<Pet>>(){}.getType());
-    }
-
-    public Pet get(HttpURLConnection connection) {
-        return new Gson().fromJson(getResponse(connection), Pet.class);
-    }
-
-    private String getResponse(HttpURLConnection connection) {
+    public String getResponse(HttpURLConnection connection) {
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(connection.getInputStream());
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -42,10 +29,11 @@ public class Response {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             return result.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "";
+        return null;
     }
 }

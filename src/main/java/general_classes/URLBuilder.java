@@ -1,4 +1,4 @@
-package pet;
+package general_classes;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;

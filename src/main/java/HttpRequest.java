@@ -1,6 +1,5 @@
-package models;
-
 import lombok.Data;
+import general_classes.Method;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

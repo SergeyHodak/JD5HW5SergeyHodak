@@ -1,4 +1,4 @@
-package pet;
+package general_classes;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

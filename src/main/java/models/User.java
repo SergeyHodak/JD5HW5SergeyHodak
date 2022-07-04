@@ -14,5 +14,6 @@ public class User {
     private Status userStatus;
 
     public enum Status {
+
     }
 }
