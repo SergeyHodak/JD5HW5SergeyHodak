@@ -15,15 +15,15 @@ import java.net.URL;
 import java.util.*;
 
 public class Get {
-    private final String RESOURCE_URL;
-    private static final String GET_FIND_BY_STATUS_URL = "/v2/pet/findByStatus";
-    private static final String GET_FIND_BY_TAGS_URL = "/v2/pet/findByTags";
-    private static final String GET_FIND_BY_ID_URL = "/v2/pet/";
+    private final String BASE_URL;
+    private static final String GET_FIND_BY_STATUS_URL = "/pet/findByStatus";
+    private static final String GET_FIND_BY_TAGS_URL = "/pet/findByTags";
+    private static final String GET_FIND_BY_ID_URL = "/pet/";
     private static final String STATUS = "status";
     private static final String TAGS = "tags";
 
-    public Get(String resourceUrl){
-        RESOURCE_URL = resourceUrl;
+    public Get(String baseURL){
+        BASE_URL = baseURL;
     }
 
     public List<Pet> findByStatus(List<Pet.Status> status) {
@@ -33,7 +33,7 @@ public class Get {
                 params.add(status1.name().toLowerCase());
             }
 
-            URL url = new URLBuilder(RESOURCE_URL + GET_FIND_BY_STATUS_URL)
+            URL url = new URLBuilder(BASE_URL + GET_FIND_BY_STATUS_URL)
                     .withParam(STATUS, params)
                     .build();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -58,7 +58,7 @@ public class Get {
                 params.add(tag.getName());
             }
 
-            URL url = new URLBuilder(RESOURCE_URL + GET_FIND_BY_TAGS_URL)
+            URL url = new URLBuilder(BASE_URL + GET_FIND_BY_TAGS_URL)
                     .withParam(TAGS, params)
                     .build();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -78,7 +78,7 @@ public class Get {
 
     public Pet findById(long id) {
         try {
-            URL url = new URL(RESOURCE_URL + GET_FIND_BY_ID_URL + id);
+            URL url = new URL(BASE_URL + GET_FIND_BY_ID_URL + id);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(Method.GET.name());
             connection.connect();

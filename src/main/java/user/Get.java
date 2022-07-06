@@ -14,20 +14,20 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class Get {
-    private final String RESOURCE_URL;
-    private static final String GET_FIND_USER_BY_USER_NAME_URL = "/v2/user/";
-    private static final String GET_REGISTER_USER_IN_SYSTEM_URL = "/v2/user/login";
-    private static final String GET_LOG_OUT_OF_THE_CURRENT_SESSION_OF_THE_LOGGED_IN_USER = "/v2/user/logout";
+    private final String BASE_URL;
+    private static final String GET_FIND_USER_BY_USER_NAME_URL = "/user/";
+    private static final String GET_REGISTER_USER_IN_SYSTEM_URL = "/user/login";
+    private static final String GET_LOG_OUT_OF_THE_CURRENT_SESSION_OF_THE_LOGGED_IN_USER = "/user/logout";
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
 
-    public Get(String resourceUrl){
-        RESOURCE_URL = resourceUrl;
+    public Get(String baseURL){
+        BASE_URL = baseURL;
     }
 
     public static void main(String[] args) {
-        String resourceUrl = "https://petstore.swagger.io";
-        Get get = new Get(resourceUrl);
+        String baseURL = "https://petstore.swagger.io/v2";
+        Get get = new Get(baseURL);
 
         User user = get.findUserByUserName("string");
         System.out.println(user);
@@ -43,7 +43,7 @@ public class Get {
 
     public User findUserByUserName(String name) {
         try {
-            URL url = new URL(RESOURCE_URL + GET_FIND_USER_BY_USER_NAME_URL + name);
+            URL url = new URL(BASE_URL + GET_FIND_USER_BY_USER_NAME_URL + name);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(Method.GET.name());
             connection.connect();
@@ -61,7 +61,7 @@ public class Get {
 
     public ApiResponse registerUserInSystem(String username, String password) {
         try {
-            URL url = new URLBuilder(RESOURCE_URL + GET_REGISTER_USER_IN_SYSTEM_URL)
+            URL url = new URLBuilder(BASE_URL + GET_REGISTER_USER_IN_SYSTEM_URL)
                     .withParam(USERNAME, new ArrayList<>(){{add(username);}})
                     .withParam(PASSWORD, new ArrayList<>(){{add(password);}})
                     .build();
@@ -82,7 +82,7 @@ public class Get {
 
     public ApiResponse logOutOfTheCurrentSessionOfTheLoggedInUser() {
         try {
-            URL url = new URL(RESOURCE_URL + GET_LOG_OUT_OF_THE_CURRENT_SESSION_OF_THE_LOGGED_IN_USER);
+            URL url = new URL(BASE_URL + GET_LOG_OUT_OF_THE_CURRENT_SESSION_OF_THE_LOGGED_IN_USER);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(Method.GET.name());
             connection.connect();

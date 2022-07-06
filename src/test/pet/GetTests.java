@@ -22,8 +22,8 @@ class GetTests {
     }
 
     public static void main(String[] args) {
-        String resourceUrl = "https://petstore.swagger.io";
-        Get get = new Get(resourceUrl);
+        String baseURL = "https://petstore.swagger.io/v2";
+        Get get = new Get(baseURL);
 
 //        List<Pet.Status> paramsStatus = new ArrayList<>();
 //        paramsStatus.add(Pet.Status.AVAILABLE);

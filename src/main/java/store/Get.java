@@ -16,18 +16,18 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Get {
-    private final String RESOURCE_URL;
-    private static final String GET_FIND_PURCHASE_ORDER_BY_ID_URL = "/v2/store/order/";
-    private static final String GET_RETURNS_PET_INVENTORIES_BY_STATUS_URL = "/v2/store/inventory";
+    private final String BASE_URL;
+    private static final String GET_FIND_PURCHASE_ORDER_BY_ID_URL = "/store/order/";
+    private static final String GET_RETURNS_PET_INVENTORIES_BY_STATUS_URL = "/store/inventory";
     private static final String STATUS = "status";
 
-    public Get(String resourceUrl) {
-        RESOURCE_URL = resourceUrl;
+    public Get(String baseURL) {
+        BASE_URL = baseURL;
     }
 
     public static void main(String[] args) {
-        String resourceUrl = "https://petstore.swagger.io";
-        Get get = new Get(resourceUrl);
+        String baseURL = "https://petstore.swagger.io/v2";
+        Get get = new Get(baseURL);
 
         Order order = get.findPurchaseOrderById(24L);
         System.out.println(order);
@@ -41,7 +41,7 @@ public class Get {
 
     public Order findPurchaseOrderById(long id) {
         try {
-            URL url = new URL(RESOURCE_URL + GET_FIND_PURCHASE_ORDER_BY_ID_URL + id);
+            URL url = new URL(BASE_URL + GET_FIND_PURCHASE_ORDER_BY_ID_URL + id);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(Method.GET.name());
             connection.connect();
@@ -64,7 +64,7 @@ public class Get {
                 params.add(status1.name().toLowerCase());
             }
 
-            URL url = new URLBuilder(RESOURCE_URL + GET_RETURNS_PET_INVENTORIES_BY_STATUS_URL)
+            URL url = new URLBuilder(BASE_URL + GET_RETURNS_PET_INVENTORIES_BY_STATUS_URL)
                     .withParam(STATUS, params)
                     .build();
 
