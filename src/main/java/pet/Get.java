@@ -28,18 +28,14 @@ public class Get {
 
     public List<Pet> findByStatus(List<Pet.Status> status) {
         try {
-            List<String> params = new ArrayList<>();
-            for (Pet.Status status1 : status) {
-                params.add(status1.name().toLowerCase());
+            URLBuilder urlBuilder = new URLBuilder(BASE_URL + GET_FIND_BY_STATUS_URL);
+            for (Pet.Status value : status) {
+                urlBuilder.withParam(STATUS, value.name().toLowerCase());
             }
-
-            URL url = new URLBuilder(BASE_URL + GET_FIND_BY_STATUS_URL)
-                    .withParam(STATUS, params)
-                    .build();
+            URL url = urlBuilder.build();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(Method.GET.name());
             connection.connect();
-
             if (HttpURLConnection.HTTP_OK == connection.getResponseCode()) {
                 Type type = new TypeToken<List<Pet>>(){}.getType();
                 String message = new Response().getResponse(connection);
@@ -53,18 +49,14 @@ public class Get {
 
     public List<Pet> findByTags(List<Tag> tags) {
         try {
-            List<String> params = new ArrayList<>();
+            URLBuilder urlBuilder = new URLBuilder(BASE_URL + GET_FIND_BY_TAGS_URL);
             for (Tag tag : tags) {
-                params.add(tag.getName());
+                urlBuilder.withParam(TAGS, tag.getName());
             }
-
-            URL url = new URLBuilder(BASE_URL + GET_FIND_BY_TAGS_URL)
-                    .withParam(TAGS, params)
-                    .build();
+            URL url = urlBuilder.build();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(Method.GET.name());
             connection.connect();
-
             if (HttpURLConnection.HTTP_OK == connection.getResponseCode()) {
                 Type type = new TypeToken<List<Pet>>(){}.getType();
                 String message = new Response().getResponse(connection);
@@ -82,7 +74,6 @@ public class Get {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(Method.GET.name());
             connection.connect();
-
             if (HttpURLConnection.HTTP_OK == connection.getResponseCode()) {
                 Type type = Pet.class;
                 String message = new Response().getResponse(connection);

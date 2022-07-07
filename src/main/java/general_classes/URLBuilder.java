@@ -22,13 +22,11 @@ public class URLBuilder {
         this.url = url;
     }
 
-    public URLBuilder withParam(String name, List<String> value) throws UnsupportedEncodingException {
+    public URLBuilder withParam(String name, String value) throws UnsupportedEncodingException {
         String charset = Charset.defaultCharset().name();
         String encodedName = URLEncoder.encode(name, charset);
-        for (String statusName : value) {
-            String encodedValue = URLEncoder.encode(statusName, charset);
-            params.add(encodedName + "=" + encodedValue);
-        }
+        String encodedValue = URLEncoder.encode(value, charset);
+        params.add(encodedName + "=" + encodedValue);
         return this;
     }
 

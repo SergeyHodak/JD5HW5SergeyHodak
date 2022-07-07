@@ -29,7 +29,7 @@ public class URLBuilderTests {
         String key = "key";
         String value = "value";
         URLBuilder urlBuilder = new URLBuilder(RESOURCE_URL);
-        urlBuilder.withParam(key, new ArrayList<>() {{add(value);}});
+        urlBuilder.withParam(key, value);
 
         String expected = RESOURCE_URL + "?" + key + "=" + value;
         Assertions.assertEquals(new URL(expected), urlBuilder.build());
@@ -43,7 +43,9 @@ public class URLBuilderTests {
         values.add("val2");
 
         URLBuilder urlBuilder = new URLBuilder(RESOURCE_URL);
-        urlBuilder.withParam(param, values);
+        for (String value : values) {
+            urlBuilder.withParam(param, value);
+        }
 
         String expected = RESOURCE_URL + "?" + param + "=" + values.get(0) + "&" + param + "=" + values.get(1);
         Assertions.assertEquals(new URL(expected), urlBuilder.build());

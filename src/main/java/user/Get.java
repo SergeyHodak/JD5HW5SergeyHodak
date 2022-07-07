@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class Get {
     private final String BASE_URL;
@@ -25,29 +24,12 @@ public class Get {
         BASE_URL = baseURL;
     }
 
-    public static void main(String[] args) {
-        String baseURL = "https://petstore.swagger.io/v2";
-        Get get = new Get(baseURL);
-
-        User user = get.findUserByUserName("string");
-        System.out.println(user);
-        System.out.println("-----------------------------------");
-
-        ApiResponse apiResponse = get.registerUserInSystem("string", "string");
-        System.out.println(apiResponse);
-        System.out.println("-----------------------------------");
-
-        ApiResponse apiResponse1 = get.logOutOfTheCurrentSessionOfTheLoggedInUser();
-        System.out.println(apiResponse1);
-    }
-
     public User findUserByUserName(String name) {
         try {
             URL url = new URL(BASE_URL + GET_FIND_USER_BY_USER_NAME_URL + name);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(Method.GET.name());
             connection.connect();
-
             if (HttpURLConnection.HTTP_OK == connection.getResponseCode()) {
                 Type type = User.class;
                 String message = new Response().getResponse(connection);
@@ -62,13 +44,12 @@ public class Get {
     public ApiResponse registerUserInSystem(String username, String password) {
         try {
             URL url = new URLBuilder(BASE_URL + GET_REGISTER_USER_IN_SYSTEM_URL)
-                    .withParam(USERNAME, new ArrayList<>(){{add(username);}})
-                    .withParam(PASSWORD, new ArrayList<>(){{add(password);}})
+                    .withParam(USERNAME, username)
+                    .withParam(PASSWORD, password)
                     .build();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(Method.GET.name());
             connection.connect();
-
             if (HttpURLConnection.HTTP_OK == connection.getResponseCode()) {
                 Type type = ApiResponse.class;
                 String message = new Response().getResponse(connection);
@@ -86,7 +67,6 @@ public class Get {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(Method.GET.name());
             connection.connect();
-
             if (HttpURLConnection.HTTP_OK == connection.getResponseCode()) {
                 Type type = ApiResponse.class;
                 String message = new Response().getResponse(connection);

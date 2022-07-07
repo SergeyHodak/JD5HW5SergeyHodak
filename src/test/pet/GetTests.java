@@ -2,25 +2,11 @@ package pet;
 
 import models.Pet;
 import models.Tag;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class GetTests {
-
-    @Test
-    void findByStatus() {
-    }
-
-    @Test
-    void findByTags() {
-    }
-
-    @Test
-    void findById() {
-    }
-
     public static void main(String[] args) {
         String baseURL = "https://petstore.swagger.io/v2";
         Get get = new Get(baseURL);

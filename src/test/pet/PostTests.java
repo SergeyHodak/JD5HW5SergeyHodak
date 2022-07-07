@@ -10,10 +10,10 @@ import java.io.File;
 class PostTests {
     public static void main(String[] args) {
         String baseURL = "https://petstore.swagger.io/v2";
-        Post post = new Post(baseURL);
+        pet.Post post = new pet.Post(baseURL);
 
         File file = new File("src/main/java/img/test.jpg");
-        ApiResponse apiResponse = post.uploadImage(9, "test", file);
+        ApiResponse apiResponse = post.uploadImage(9L, "test", file);
         System.out.println("apiResponse = " + apiResponse);
         System.out.println("------------------------------");
 
@@ -28,7 +28,11 @@ class PostTests {
             setName("cow");
         }}});
         pet.setPhotoUrls(new String[]{"string"});
-        Pet pet1 = post.AddANewPetToTheStore(pet);
+        Pet pet1 = post.addANewPetToTheStore(pet);
         System.out.println("new Pet = " + pet1);
+        System.out.println("------------------------------");
+
+        ApiResponse apiResponse1 = post.updateStorePetWithFormData(9L, "mozilla2", Pet.Status.AVAILABLE);
+        System.out.println("apiResponse1 = " + apiResponse1);
     }
 }
