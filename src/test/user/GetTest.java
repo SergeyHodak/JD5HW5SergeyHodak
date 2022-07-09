@@ -8,7 +8,7 @@ public class GetTest {
         String baseURL = "https://petstore.swagger.io/v2";
         Get get = new Get(baseURL);
 
-        User user = get.findUserByUserName("string");
+        User user = get.findUserByUsername("string");
         System.out.println(user);
         System.out.println("-----------------------------------");
 

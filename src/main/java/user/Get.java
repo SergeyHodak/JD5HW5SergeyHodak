@@ -24,7 +24,7 @@ public class Get {
         BASE_URL = baseURL;
     }
 
-    public User findUserByUserName(String name) {
+    public User findUserByUsername(String name) {
         try {
             URL url = new URL(BASE_URL + GET_FIND_USER_BY_USER_NAME_URL + name);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

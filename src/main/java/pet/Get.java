@@ -47,6 +47,7 @@ public class Get {
         return new ArrayList<>();
     }
 
+    @Deprecated
     public List<Pet> findByTags(List<Tag> tags) {
         try {
             URLBuilder urlBuilder = new URLBuilder(BASE_URL + GET_FIND_BY_TAGS_URL);
